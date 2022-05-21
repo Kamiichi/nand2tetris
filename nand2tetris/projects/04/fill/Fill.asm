@@ -13,30 +13,39 @@
 
 // Put your code here.
 
-(LOOP)
-  @6000
-  D=M
-  @SCREEN
-  D; JGT
-  @LOOP
-  0; JMP
+(INIT)  	
+	@8192
+	D=A
+	@i
+	M=D
 
-(SCREEN)
-  @6000
-  D=M
-  @LOOP
-  D; JEQ
-  @4000
-  M=1
-  @4001
-  M=1
-  @4002
-  M=1
-  @4003
-  M=1
-  @4004
-  M=1
-  @4005
-  M=1
-  @SCREEN
-  0; JMP
+(LOOP)
+	@i
+	M=M-1
+	D=M
+	@INIT
+	D;JLT
+	@KBD
+	D=M
+	@WHITE
+	D;JEQ
+	@BLACK
+	0;JMP
+
+(BLACK)             
+	@SCREEN
+	D=A
+	@i
+	A=D+M
+	M=-1
+	@LOOP
+	0;JMP
+
+(WHITE)
+	@SCREEN
+	D=A                
+	@i        
+	A=D+M
+	M=0
+	@LOOP
+	0;JMP
